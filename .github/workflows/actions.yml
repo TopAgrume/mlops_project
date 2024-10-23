@@ -26,7 +26,7 @@ jobs:
         run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@20.86.55.5:~/docker-compose.yml
 
       - name: Connect and pull image
-        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~ && docker pull alexandredr/alexdr-house-predict"
+        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~ && docker pull alexandredr/alexdr-house-predict:latest"
 
       - name: Restart the container
-        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~ && docker compose up -d alexdr-house-predict"
+        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~ && docker compose down && docker compose up -d alexdr-house-predict"
