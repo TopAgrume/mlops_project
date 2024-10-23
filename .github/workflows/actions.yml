@@ -1,0 +1,26 @@
+name: deploy_web_server
+on: [push]
+
+jobs:
+  deploy_web_server:
+    runs-on: ubuntu-latest
+    steps:
+      - use: action/checkout@v2
+
+      - name: Build web server
+        run: docker compose build alexdr-house-predict
+
+      - name: Tag web server
+        run: docker tag alexdr-house-predict alexandredr/alexdr-house-predict
+
+      - name: Login into docker
+        run: echo "${{ secrets.LOGIN_SECRET }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push docker image
+        run: docker push alexandredr/alexdr-house-predict
+
+      - name: Connect and pull image
+        run: ssh ubuntu@17.2.2.1 "docker compose pull alexandredr/alexdr-house-predict"
+
+      - name: Restart the container
+        run: ssh ubuntu@17.2.2.1 "docker compose up -d alexdr-house-predict"
