@@ -8,10 +8,10 @@ jobs:
   deploy_web_server:
     runs-on: ubuntu-latest
     steps:
-      - use: action/checkout@v2
+      - uses: action/checkout@v2
 
       - name: Build web server
-        run: docker compose build alexdr-house-predict
+        run: docker-compose build alexdr-house-predict
 
       - name: Tag web server
         run: docker tag alexdr-house-predict alexandredr/alexdr-house-predict
