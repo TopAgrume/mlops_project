@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build web server
-        run: docker-compose build alexdr-house-predict
+        run: docker compose build alexdr-house-predict
 
       - name: Tag web server
         run: docker tag alexdr-house-predict alexandredr/alexdr-house-predict
