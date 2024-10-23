@@ -3,6 +3,6 @@ name: "web_server_project"
 services:
   alexdr-house-predict:
     build: .
-    container_name: alexdr-house-predict
+    image: alexdr-house-predict
     ports:
       - "5000:5000"
