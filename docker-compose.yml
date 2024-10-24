@@ -3,6 +3,6 @@ name: "web_server_project"
 services:
   alexdr-house-predict:
     build: .
-    image: alexdr-house-predict
+    image: alexandredr/alexdr-house-predict:latest
     ports:
       - "5000:5000"
