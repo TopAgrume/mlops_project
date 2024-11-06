@@ -5,8 +5,8 @@ This project contains a dockerized FastAPI web server for predicting house price
 ## Running locally
 To run the web server locally using Docker, follow these steps:
 ```sh
-docker-compose build
-docker-compose up -d
+docker compose build
+docker compose up -d
 ```
 
 ## Test the prediction API
