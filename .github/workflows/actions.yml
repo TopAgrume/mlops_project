@@ -24,11 +24,11 @@ jobs:
 
       - name: Copy docker-compose file to server
         run: |
-          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "mkdir -p ~/adr"
-          sshpass -p "${{ secrets.SERVER_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@20.86.55.5:~/adr/docker-compose.yml
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no "${{ secrets.SERVER_LOGIN }}" "mkdir -p ~/adr"
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" scp -o StrictHostKeyChecking=no docker-compose.yml "${{ secrets.SERVER_LOGIN }}":~/adr/docker-compose.yml
 
       - name: Connect and pull image
-        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~/adr && docker pull alexandredr/alexdr-house-predict:latest"
+        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no "${{ secrets.SERVER_LOGIN }}" "cd ~/adr && docker pull alexandredr/alexdr-house-predict:latest"
 
       - name: Restart the container
-        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@20.86.55.5 "cd ~/adr && docker compose down && docker compose up -d alexdr-house-predict"
+        run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no "${{ secrets.SERVER_LOGIN }}" "cd ~/adr && docker compose down && docker compose up -d alexdr-house-predict"
